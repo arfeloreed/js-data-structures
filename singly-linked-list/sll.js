@@ -60,6 +60,7 @@ class SinglyLinkedList {
     const current = this.head;
     this.head = current.next;
     this.length--;
+    current.next = null;
 
     return current;
   }
@@ -160,14 +161,14 @@ list.push("!");
 // list.push("123");
 // list.unshift("hi");
 // console.log(list.pop());
-// console.log(list.shift());
+console.log(list.shift());
 // console.log(list.get(0));
 // console.log(list.set("change", 1));
 // console.log(list.insert("insert", 3));
 // console.log(list.remove(3));
 console.log(list);
-list.reverse();
-console.log(list);
+// list.reverse();
+// console.log(list);
 // console.log(list.head);
 // console.log(list.head.next);
 // console.log(list.head.next.next);
