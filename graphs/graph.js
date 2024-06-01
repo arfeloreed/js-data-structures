@@ -50,6 +50,7 @@ class Graph {
     return delete this.adjacencyList[node];
   }
   // graph traversal
+  // using recursion
   dfsRecursive(node) {
     let result = [];
     let visited = {};
@@ -72,7 +73,59 @@ class Graph {
 
     return result;
   }
-  dfsIterative() {}
+  // using normal approach
+  dfsIterative(node) {
+    const stack = [node];
+    const result = [];
+    const visited = {};
+
+    // use while loop to keep going until stack is empty
+    while (stack.length) {
+      // pop the last node
+      const current = stack.pop();
+      // if node is not visited
+      if (visited[current] !== true) {
+        // mark it visited
+        visited[current] = true;
+        // add to result list
+        result.push(current);
+        // add its neighbors to the stack
+        const neighbors = this.adjacencyList[current];
+        for (let i = neighbors.length - 1; i >= 0; i--) {
+          stack.push(neighbors[i]);
+        }
+      }
+    }
+
+    return result;
+  }
+  // bfs implementation
+  bfs(node) {
+    const queue = [node];
+    const result = [];
+    const visited = {};
+    let current;
+
+    // use while loop to keep going until queue is empty
+    while (queue.length) {
+      // pop the first node
+      current = queue.shift();
+      // if node is not visited
+      if (visited[current] !== true) {
+        // mark it visited
+        visited[current] = true;
+        // add to result list
+        result.push(current);
+        // add its neighbors to the queue
+        const neighbors = this.adjacencyList[current];
+        for (let i = 0, len = neighbors.length; i < len; i++) {
+          queue.push(neighbors[i]);
+        }
+      }
+    }
+
+    return result;
+  }
 }
 
 // const graph = new Graph();
@@ -102,3 +155,5 @@ g.addEdge("D", "F");
 g.addEdge("E", "F");
 // console.log(g);
 console.log(g.dfsRecursive("A"));
+console.log(g.dfsIterative("A"));
+console.log(g.bfs("A"));
